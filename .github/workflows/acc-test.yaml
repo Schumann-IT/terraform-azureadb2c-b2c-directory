@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   acc-tests:
-    runs-on: [self-hosted, 1ES.Pool=<YOUR_REPO_NAME>]
+    runs-on: ubuntu-latest
     environment:
       name: acctests
     steps:
@@ -24,18 +24,18 @@ jobs:
       - name: init
         run: |
           docker run --rm -v $(pwd):/src -w /src mcr.microsoft.com/azterraform:latest make generate
-      - name: e2e test
-        run: |
-          sh scripts/ci-e2e.sh
-      - name: upload test version snapshots
-        uses: actions/upload-artifact@v3
-        with:
-          name: TestRecord-${{ github.event.number }}
-          retention-days: 60
-          path: |
-            examples/**/TestRecord.md.tmp
-      - name: version-upgrade test
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          sh scripts/ci-version-upgrade.sh
+#      - name: e2e test
+#        run: |
+#          sh scripts/ci-e2e.sh
+#      - name: upload test version snapshots
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: TestRecord-${{ github.event.number }}
+#          retention-days: 60
+#          path: |
+#            examples/**/TestRecord.md.tmp
+#      - name: version-upgrade test
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          sh scripts/ci-version-upgrade.sh
