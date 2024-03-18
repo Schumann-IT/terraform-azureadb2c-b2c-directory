@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased](https://github.com/Schumann-IT/terraform-azureb2c-directory/tree/HEAD)
+## [v0.1.1](https://github.com/Schumann-IT/terraform-azureb2c-directory/tree/v0.1.1) (2024-03-18)
 
 **Merged pull requests:**
 
