@@ -7,7 +7,7 @@ data "azurerm_aadb2c_directory" "this" {
   domain_name         = var.domain_name
 }
 
-data "azuread_application" "extensions-app" {
+data "azuread_application" "extensions_app" {
   display_name = "b2c-extensions-app. Do not modify. Used by AADB2C for storing user data."
 }
 
@@ -29,8 +29,4 @@ data "azurerm_storage_container" "template_storage" {
 
   name                 = var.template_storage.existing_storage_container_name
   storage_account_name = try(data.azurerm_storage_account.template_storage[0].name, azurerm_storage_account.template_storage[0].name)
-}
-
-data "azuread_application" "b2c-extensions-app" {
-  display_name = "b2c-extensions-app. Do not modify. Used by AADB2C for storing user data."
 }

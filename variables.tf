@@ -1,34 +1,35 @@
 variable "resource_group_name" {
-  type        = string
   description = "The name of the resource group in which the b2c directory has been created"
+  type        = string
 }
 
 variable "domain_name" {
-  type        = string
   description = "The name of the b2c directory domain"
+  type        = string
 }
 
 variable "client_id" {
-  type        = string
   description = "The Client ID which should be used when authenticating as a service principal."
+  type        = string
 }
 
 variable "client_secret" {
-  type        = string
   description = "The application password to be used when authenticating using a client secret."
+  type        = string
 }
 
 variable "identity_experience_framework_app_registration_object_id" {
-  type        = string
   description = "The object ID of the app registration for the identity experience framework"
+  type        = string
 }
 
 variable "proxy_identity_experience_framework_app_registration_object_id" {
-  type        = string
   description = "The object ID of the app registration for the proxy identity experience framework"
+  type        = string
 }
 
 variable "custom_app_registrations" {
+  description = "A list of custom app registrations to create or update"
   type = list(object({
     create                     = optional(bool, false)
     app_registration_object_id = optional(string, null)
@@ -76,6 +77,7 @@ variable "custom_app_registrations" {
 }
 
 variable "template_storage" {
+  description = "The storage account to use for the custom policy templates"
   type = object({
     manage                                       = bool
     existing_storage_account_name                = optional(string, null)
@@ -99,6 +101,7 @@ variable "template_storage" {
 }
 
 variable "keysets" {
+  description = "A list of keysets to create or update"
   type = list(object({
     name                 = string
     use                  = optional(string, null)

@@ -1,20 +1,20 @@
-// import statements to import exsisting app registrations
-/*
-import {
-  id = "/applications/<object-id of the proxy app>"
-  to = module.b2c.module.proxy-identity-experience-framework-app-registration.azuread_application.this
-}
+# import statements to import exsisting app registrations
 
-import {
-  id = "/applications/<object-id of the identity experiance app>"
-  to = module.b2c.module.identity-experience-framework-app-registration.azuread_application.this
-}
+#import {
+#  id = "/applications/<object-id of the proxy app>"
+#  to = module.b2c.module.proxy_identity_experience_framework_app_registration.azuread_application.this
+#}
+#
+#import {
+#  id = "/applications/<object-id of the identity experiance app>"
+#  to = module.b2c.module.identity_experience_framework_app_registration.azuread_application.this
+#}
+#
+#import {
+#  id = "/applications/<object-id of the saml app>"
+#  to = module.b2c.module.custom_app_registrations["<object-id of the saml app>"].azuread_application.this
+#}
 
-import {
-  id = "/applications/<object-id of the saml app>"
-  to = module.b2c.module.custom-app-registrations["<object-id of the saml app>"].azuread_application.this
-}
-*/
 
 
 module "b2c" {
