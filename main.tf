@@ -1,4 +1,4 @@
-module "identity-experience-framework-app-registration" {
+module "identity_experience_framework_app_registration" {
   source = "./modules/app-registration"
 
   create    = false
@@ -16,8 +16,8 @@ module "identity-experience-framework-app-registration" {
       ]
     }
     required_graph_api_permissions = [
-      "37f7f235-527c-4136-accd-4a02d197296e", // https://learn.microsoft.com/en-us/graph/permissions-reference#openid
-      "7427e0e9-2fba-42fe-b0c0-848c9e6a8182"  // https://learn.microsoft.com/en-us/graph/permissions-reference#offline_access
+      "37f7f235-527c-4136-accd-4a02d197296e", # https://learn.microsoft.com/en-us/graph/permissions-reference#openid
+      "7427e0e9-2fba-42fe-b0c0-848c9e6a8182"  # https://learn.microsoft.com/en-us/graph/permissions-reference#offline_access
     ]
     permission_scopes = [
       {
@@ -29,12 +29,12 @@ module "identity-experience-framework-app-registration" {
   }
 }
 
-resource "azureadb2c_application_patch" "identity-experience-framework-app-registration" {
-  object_id  = module.identity-experience-framework-app-registration.object_id
+resource "azureadb2c_application_patch" "identity_experience_framework_app_registration" {
+  object_id  = module.identity_experience_framework_app_registration.object_id
   patch_file = "${path.module}/IdentityExperienceFrameworkAppPatch.json"
 }
 
-module "proxy-identity-experience-framework-app-registration" {
+module "proxy_identity_experience_framework_app_registration" {
   source = "./modules/app-registration"
 
   create    = false
@@ -52,14 +52,14 @@ module "proxy-identity-experience-framework-app-registration" {
       ]
     }
     required_graph_api_permissions = [
-      "37f7f235-527c-4136-accd-4a02d197296e", // https://learn.microsoft.com/en-us/graph/permissions-reference#openid
-      "7427e0e9-2fba-42fe-b0c0-848c9e6a8182"  // https://learn.microsoft.com/en-us/graph/permissions-reference#offline_access
+      "37f7f235-527c-4136-accd-4a02d197296e", # https://learn.microsoft.com/en-us/graph/permissions-reference#openid
+      "7427e0e9-2fba-42fe-b0c0-848c9e6a8182"  # https://learn.microsoft.com/en-us/graph/permissions-reference#offline_access
     ]
-    required_resource_access = module.identity-experience-framework-app-registration.exposed_api_permissions
+    required_resource_access = module.identity_experience_framework_app_registration.exposed_api_permissions
   }
 }
 
-module "custom-app-registrations" {
+module "custom_app_registrations" {
   source = "./modules/app-registration"
 
   for_each = {
@@ -75,7 +75,7 @@ resource "azureadb2c_application_patch" "custom_app_registrations" {
   for_each = {
     for app in var.custom_app_registrations : app.create == false ? app.app_registration_object_id : app.config.display_name => app if try(app.patch, null) != null
   }
-  object_id         = module.custom-app-registrations[each.key].object_id
+  object_id         = module.custom_app_registrations[each.key].object_id
   patch_file        = each.value.patch.file
   saml_metadata_url = try(each.value.patch.saml_metadata_url, null)
 }
@@ -86,6 +86,8 @@ resource "azurerm_resource_group" "template_storage" {
 
   name     = try(var.template_storage.storage_account_resource_group_name, data.azurerm_resource_group.this.name)
   location = try(var.template_storage.storage_account_location, data.azurerm_resource_group.this.location)
+
+  tags = {}
 }
 
 resource "azurerm_storage_account" "template_storage" {
@@ -106,6 +108,8 @@ resource "azurerm_storage_account" "template_storage" {
       max_age_in_seconds = 200
     }
   }
+
+  tags = {}
 }
 
 resource "azurerm_storage_container" "template_storage" {
