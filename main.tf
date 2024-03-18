@@ -84,20 +84,20 @@ resource "azureadb2c_application_patch" "custom_app_registrations" {
 resource "azurerm_resource_group" "template_storage" {
   count = var.template_storage.manage == true && length(data.azurerm_resource_group.template_storage) > 0 ? 0 : 1
 
-  name     = try(var.template_storage.storage_account_resource_group_name, data.azurerm_resource_group.this.name)
   location = try(var.template_storage.storage_account_location, data.azurerm_resource_group.this.location)
-
-  tags = {}
+  name     = try(var.template_storage.storage_account_resource_group_name, data.azurerm_resource_group.this.name)
+  tags     = {}
 }
 
 resource "azurerm_storage_account" "template_storage" {
   count = var.template_storage.manage == true && length(data.azurerm_storage_account.template_storage) > 0 ? 0 : 1
 
-  name                     = var.template_storage.storage_account_name == null ? local.tenant_name : var.template_storage.storage_account_name
-  resource_group_name      = try(data.azurerm_resource_group.template_storage[0].name, azurerm_resource_group.template_storage[0].name)
-  location                 = try(data.azurerm_resource_group.template_storage[0].location, azurerm_resource_group.template_storage[0].location)
   account_replication_type = "GRS"
   account_tier             = "Standard"
+  location                 = try(data.azurerm_resource_group.template_storage[0].location, azurerm_resource_group.template_storage[0].location)
+  name                     = var.template_storage.storage_account_name == null ? local.tenant_name : var.template_storage.storage_account_name
+  resource_group_name      = try(data.azurerm_resource_group.template_storage[0].name, azurerm_resource_group.template_storage[0].name)
+  tags                     = {}
 
   blob_properties {
     cors_rule {
@@ -108,16 +108,13 @@ resource "azurerm_storage_account" "template_storage" {
       max_age_in_seconds = 200
     }
   }
-
-  tags = {}
 }
 
 resource "azurerm_storage_container" "template_storage" {
   count = var.template_storage.manage == true && length(data.azurerm_storage_container.template_storage) > 0 ? 0 : 1
 
-  name                 = var.template_storage.storage_container_name == null ? "trustframeworktemplates" : var.template_storage.storage_container_name
-  storage_account_name = try(data.azurerm_storage_account.template_storage[0].name, azurerm_storage_account.template_storage[0].name)
-
+  name                  = var.template_storage.storage_container_name == null ? "trustframeworktemplates" : var.template_storage.storage_container_name
+  storage_account_name  = try(data.azurerm_storage_account.template_storage[0].name, azurerm_storage_account.template_storage[0].name)
   container_access_type = "blob"
 }
 

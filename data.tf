@@ -3,8 +3,8 @@ data "azurerm_resource_group" "this" {
 }
 
 data "azurerm_aadb2c_directory" "this" {
-  resource_group_name = data.azurerm_resource_group.this.name
   domain_name         = var.domain_name
+  resource_group_name = data.azurerm_resource_group.this.name
 }
 
 data "azuread_application" "extensions_app" {
