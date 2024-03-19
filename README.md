@@ -15,7 +15,7 @@ This module manages the configuration of an Azure AD B2C directory.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >=2.43.0 |
-| <a name="requirement_azureadb2c"></a> [azureadb2c](#requirement\_azureadb2c) | >= 0.2.1, < 0.3.0 |
+| <a name="requirement_azureadb2c"></a> [azureadb2c](#requirement\_azureadb2c) | >= 0.2.1, < 1.0.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.11, < 4.0 |
 
 ## Providers
@@ -23,7 +23,7 @@ This module manages the configuration of an Azure AD B2C directory.
 | Name | Version |
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | >=2.43.0 |
-| <a name="provider_azureadb2c"></a> [azureadb2c](#provider\_azureadb2c) | >= 0.2.1, < 0.3.0 |
+| <a name="provider_azureadb2c"></a> [azureadb2c](#provider\_azureadb2c) | >= 0.2.1, < 1.0.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.11, < 4.0 |
 
 ## Modules

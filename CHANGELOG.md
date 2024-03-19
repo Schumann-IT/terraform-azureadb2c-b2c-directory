@@ -1,11 +1,17 @@
 # Changelog
 
-## [v0.1.1](https://github.com/Schumann-IT/terraform-azureb2c-directory/tree/v0.1.1) (2024-03-18)
+## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
 
 **Merged pull requests:**
 
-- build\(deps\): bump the go\_modules group group in /test with 4 updates [\#2](https://github.com/Schumann-IT/terraform-azureb2c-directory/pull/2) ([dependabot[bot]](https://github.com/apps/dependabot))
-- feat: pr check workflow [\#1](https://github.com/Schumann-IT/terraform-azureb2c-directory/pull/1) ([janschumann](https://github.com/janschumann))
+- fix: relax provider version requirements [\#3](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/3) ([janschumann](https://github.com/janschumann))
+
+## [v0.1.1](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.1.1) (2024-03-18)
+
+**Merged pull requests:**
+
+- build\(deps\): bump the go\_modules group group in /test with 4 updates [\#2](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/2) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat: pr check workflow [\#1](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/1) ([janschumann](https://github.com/janschumann))
 
 
 
