@@ -63,7 +63,7 @@ module "custom_app_registrations" {
   source = "./modules/app-registration"
 
   for_each = {
-    for app in var.custom_app_registrations : app.create == false ? app.app_registration_object_id : app.config.display_name => app
+    for app in var.custom_app_registrations : app.create == false ? data.azuread_application.existing_custom_app_registrations[app.app_registration_object_id].display_name : app.config.display_name => app
   }
 
   create    = each.value.create
@@ -73,7 +73,7 @@ module "custom_app_registrations" {
 
 resource "azureadb2c_application_patch" "custom_app_registrations" {
   for_each = {
-    for app in var.custom_app_registrations : app.create == false ? app.app_registration_object_id : app.config.display_name => app if try(app.patch, null) != null
+    for app in var.custom_app_registrations : app.create == false ? data.azuread_application.existing_custom_app_registrations[app.app_registration_object_id].display_name : app.config.display_name => app if try(app.patch, null) != null
   }
   object_id         = module.custom_app_registrations[each.key].object_id
   patch_file        = each.value.patch.file
