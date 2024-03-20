@@ -15,6 +15,7 @@ data "azuread_application" "existing_custom_app_registrations" {
   for_each = {
     for app in var.custom_app_registrations : app.app_registration_object_id => app if app.create == false
   }
+
   object_id = each.key
 }
 

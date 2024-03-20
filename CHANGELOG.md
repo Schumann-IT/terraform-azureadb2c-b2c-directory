@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
+
+**Merged pull requests:**
+
+- feat: key all resources by name [\#4](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/4) ([janschumann](https://github.com/janschumann))
+
 ## [v0.1.2](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.1.2) (2024-03-19)
 
 **Merged pull requests:**
