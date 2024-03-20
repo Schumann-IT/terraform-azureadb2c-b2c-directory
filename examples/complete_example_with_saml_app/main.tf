@@ -16,7 +16,7 @@
 #}
 
 data "azurerm_resource_group" "this" {
-  name     = "<the resource group in which the b2c directory has been cretated"
+  name     = "b2c"
 }
 
 module "b2c" {
