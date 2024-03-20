@@ -16,7 +16,7 @@
 #}
 
 data "azurerm_resource_group" "this" {
-  name     = "b2c"
+  name = "b2c"
 }
 
 module "b2c" {
