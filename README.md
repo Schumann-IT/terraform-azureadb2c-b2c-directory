@@ -13,17 +13,17 @@ This module manages the configuration of an Azure AD B2C directory.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >=2.43.0 |
-| <a name="requirement_azureadb2c"></a> [azureadb2c](#requirement\_azureadb2c) | >= 0.2.1, < 1.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.4.0, < 2.0.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >= 2.38.0 |
+| <a name="requirement_azureadb2c"></a> [azureadb2c](#requirement\_azureadb2c) | < 1.0.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.11, < 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | >=2.43.0 |
-| <a name="provider_azureadb2c"></a> [azureadb2c](#provider\_azureadb2c) | >= 0.2.1, < 1.0.0 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | >= 2.38.0 |
+| <a name="provider_azureadb2c"></a> [azureadb2c](#provider\_azureadb2c) | < 1.0.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.11, < 4.0 |
 
 ## Modules
@@ -47,6 +47,7 @@ This module manages the configuration of an Azure AD B2C directory.
 | [azurerm_resource_group.template_storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_storage_account.template_storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_container.template_storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
+| [azuread_application.existing_custom_app_registrations](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/application) | data source |
 | [azuread_application.extensions_app](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/application) | data source |
 | [azurerm_aadb2c_directory.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/aadb2c_directory) | data source |
 | [azurerm_resource_group.template_storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |

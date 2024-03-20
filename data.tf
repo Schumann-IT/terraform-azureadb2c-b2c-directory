@@ -11,6 +11,13 @@ data "azuread_application" "extensions_app" {
   display_name = "b2c-extensions-app. Do not modify. Used by AADB2C for storing user data."
 }
 
+data "azuread_application" "existing_custom_app_registrations" {
+  for_each = {
+    for app in var.custom_app_registrations : app.app_registration_object_id => app if app.create == false
+  }
+  object_id = each.key
+}
+
 data "azurerm_resource_group" "template_storage" {
   count = var.template_storage.manage == true && var.template_storage.storage_account_resource_group_name == null ? 1 : 0
 

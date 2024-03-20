@@ -15,11 +15,13 @@
 #  to = module.b2c.module.custom_app_registrations["<object-id of the saml app>"].azuread_application.this
 #}
 
-
+data "azurerm_resource_group" "this" {
+  name = "b2c"
+}
 
 module "b2c" {
   source                                                         = "../../"
-  resource_group_name                                            = "<the resource group in which the b2c directory has been cretated"
+  resource_group_name                                            = data.azurerm_resource_group.this.name
   client_id                                                      = "<the service principal client id"
   client_secret                                                  = "<the service principal client secret (password)"
   domain_name                                                    = "<the directory domain name>"
