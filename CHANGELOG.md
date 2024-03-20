@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
+## [v0.2.0](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.2.0) (2024-03-20)
 
 **Merged pull requests:**
 
