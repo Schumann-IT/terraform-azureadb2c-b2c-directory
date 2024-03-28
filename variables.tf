@@ -140,4 +140,5 @@ variable "localizations" {
     username_hint_text     = optional(string, null),
   }))
   default = []
+  description = "A list of organization branding localizations to create or update"
 }
