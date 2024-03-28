@@ -4,6 +4,7 @@
 
 **Merged pull requests:**
 
+- build\(deps\): bump github.com/Azure/terraform-module-test-helper from 0.19.0 to 0.20.0 in /test [\#9](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/9) ([dependabot[bot]](https://github.com/apps/dependabot))
 - feat: organization branding [\#8](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/8) ([janschumann](https://github.com/janschumann))
 
 ## [v0.2.0](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.2.0) (2024-03-20)
