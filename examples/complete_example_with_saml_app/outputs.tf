@@ -13,4 +13,3 @@ output "azure_b2c_cli_settings" {
 output "localizations" {
   value = module.b2c.localizations
 }
-
