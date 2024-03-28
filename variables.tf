@@ -127,3 +127,17 @@ variable "keysets" {
     error_message = "If a type is specified, use must also be specified"
   }
 }
+
+variable "localizations" {
+  type = list(object({
+    lang                   = string,
+    background_color       = optional(string, null),
+    banner_logo_file       = optional(string, null),
+    background_image_file  = optional(string, null),
+    square_logo_light_file = optional(string, null),
+    square_logo_dark_file  = optional(string, null),
+    sign_in_page_text      = optional(string, null),
+    username_hint_text     = optional(string, null),
+  }))
+  default = []
+}

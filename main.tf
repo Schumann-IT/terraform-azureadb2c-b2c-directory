@@ -161,3 +161,37 @@ resource "azureadb2c_trustframework_keyset_key" "key_keysets" {
   use  = each.value.use
   type = each.value.type
 }
+
+resource "azureadb2c_organizational_branding_localization" "default" {
+  for_each = {
+    for l in var.localizations : l.lang => l if l.lang == "default"
+  }
+
+  id                 = "0"
+  background_color   = each.value.background_color == null ? null : each.value.background_color
+  banner_logo        = each.value.banner_logo_file == null ? null : filebase64(each.value.banner_logo_file)
+  background_image   = each.value.background_image_file == null ? null : filebase64(each.value.background_image_file)
+  square_logo_light  = each.value.square_logo_light_file == null ? null : filebase64(each.value.square_logo_light_file)
+  square_logo_dark   = each.value.square_logo_dark_file == null ? null : filebase64(each.value.square_logo_dark_file)
+  sign_in_page_text  = each.value.sign_in_page_text == null ? null : each.value.sign_in_page_text
+  username_hint_text = each.value.username_hint_text == null ? null : each.value.username_hint_text
+}
+
+resource "azureadb2c_organizational_branding_localization" "this" {
+  for_each = {
+    for l in var.localizations : l.lang => l if l.lang != "default"
+  }
+
+  id                 = each.key == "default" ? "0" : each.key
+  background_color   = each.value.background_color == null ? null : each.value.background_color
+  banner_logo        = each.value.banner_logo_file == null ? null : filebase64(each.value.banner_logo_file)
+  background_image   = each.value.background_image_file == null ? null : filebase64(each.value.background_image_file)
+  square_logo_light  = each.value.square_logo_light_file == null ? null : filebase64(each.value.square_logo_light_file)
+  square_logo_dark   = each.value.square_logo_dark_file == null ? null : filebase64(each.value.square_logo_dark_file)
+  sign_in_page_text  = each.value.sign_in_page_text == null ? null : each.value.sign_in_page_text
+  username_hint_text = each.value.username_hint_text == null ? null : each.value.username_hint_text
+
+  depends_on = [
+    azureadb2c_organizational_branding_localization.default
+  ]
+}

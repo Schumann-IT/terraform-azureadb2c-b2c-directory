@@ -27,11 +27,11 @@ variable "config" {
       logout_url                    = optional(string, null)
       access_token_issuance_enabled = optional(bool, false)
       id_token_issuance_enabled     = optional(bool, false)
-    }), {})
+    }), { enabled = false })
     public_client = optional(object({
       enabled       = optional(bool, false)
       redirect_uris = optional(list(string), [])
-    }), {})
+    }), { enabled = false })
     required_graph_api_permissions = optional(list(string), [])
     identifier_uri                 = optional(string, "")
     domain_name                    = optional(string, "")

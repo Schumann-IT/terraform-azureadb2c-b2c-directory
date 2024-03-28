@@ -68,3 +68,6 @@ test/go.sum
 
 /TestRecord
 **/TestRecord.md.tmp
+
+examples/complete_example_with_saml_app/.env.bak
+examples/complete_example_with_saml_app/.env

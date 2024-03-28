@@ -44,3 +44,8 @@ output "proxy_identity_experience_framework_application_id" {
   description = "The application id of the proxy identity experience framework app registration"
   value       = module.proxy_identity_experience_framework_app_registration.application_id
 }
+
+output "localizations" {
+  description = "The localizations"
+  value       = merge(azureadb2c_organizational_branding_localization.this, azureadb2c_organizational_branding_localization.default)
+}
