@@ -139,6 +139,6 @@ variable "localizations" {
     sign_in_page_text      = optional(string, null),
     username_hint_text     = optional(string, null),
   }))
-  default = []
+  default     = []
   description = "A list of organization branding localizations to create or update"
 }
