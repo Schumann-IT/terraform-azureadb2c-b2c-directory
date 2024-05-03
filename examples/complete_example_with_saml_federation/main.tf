@@ -41,7 +41,7 @@ module "b2c" {
           enabled       = true
           redirect_uris = ["https://localhost/"]
         }
-        required_graph_api_permissions = ["e1fe6dd8-ba31-4d61-89e7-88639da4683d"] // https://learn.microsoft.com/en-us/graph/permissions-reference#userread
+        required_graph_api_permissions = ["e1fe6dd8-ba31-4d61-89e7-88639da4683d"] # https://learn.microsoft.com/en-us/graph/permissions-reference#userread
         identifier_uri                 = "https://example.com/issuer"
       }
       patch = {
