@@ -92,7 +92,7 @@ variable "custom_app_registrations" {
     }), null)
   }))
   default     = []
-  description = "A list of custom app registrations to create or update"
+  description = "A list of custom app registrations to create or update. Please see https://registry.terraform.io/modules/Schumann-IT/b2c-app-registration/azuread/latest#input_config for details"
 
   validation {
     condition     = length([for app in var.custom_app_registrations : app if app.create == true]) == length([for app in var.custom_app_registrations : app if app.create == true && app.app_registration_object_id != null])
