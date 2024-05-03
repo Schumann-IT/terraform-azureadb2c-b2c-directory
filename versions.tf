@@ -8,7 +8,7 @@ terraform {
     }
     azureadb2c = {
       source  = "Schumann-IT/azureadb2c"
-      version = "< 1.0.0"
+      version = ">= 0.4.0, < 1.0.0"
     }
     azurerm = {
       source  = "hashicorp/azurerm"

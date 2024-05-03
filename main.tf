@@ -175,6 +175,10 @@ resource "azureadb2c_organizational_branding_localization" "default" {
   square_logo_dark   = each.value.square_logo_dark_file == null ? null : filebase64(each.value.square_logo_dark_file)
   sign_in_page_text  = each.value.sign_in_page_text == null ? null : each.value.sign_in_page_text
   username_hint_text = each.value.username_hint_text == null ? null : each.value.username_hint_text
+
+  depends_on = [
+    azureadb2c_organizational_branding_localization.this
+  ]
 }
 
 resource "azureadb2c_organizational_branding_localization" "this" {
@@ -182,7 +186,7 @@ resource "azureadb2c_organizational_branding_localization" "this" {
     for l in var.localizations : l.lang => l if l.lang != "default"
   }
 
-  id                 = each.key == "default" ? "0" : each.key
+  id                 = each.key
   background_color   = each.value.background_color == null ? null : each.value.background_color
   banner_logo        = each.value.banner_logo_file == null ? null : filebase64(each.value.banner_logo_file)
   background_image   = each.value.background_image_file == null ? null : filebase64(each.value.background_image_file)
@@ -190,8 +194,4 @@ resource "azureadb2c_organizational_branding_localization" "this" {
   square_logo_dark   = each.value.square_logo_dark_file == null ? null : filebase64(each.value.square_logo_dark_file)
   sign_in_page_text  = each.value.sign_in_page_text == null ? null : each.value.sign_in_page_text
   username_hint_text = each.value.username_hint_text == null ? null : each.value.username_hint_text
-
-  depends_on = [
-    azureadb2c_organizational_branding_localization.default
-  ]
 }

@@ -58,6 +58,7 @@ variable "custom_app_registrations" {
     config = object({
       display_name                   = optional(string, null)
       fallback_public_client_enabled = optional(bool, false)
+      sign_in_audience               = optional(string, "AzureADMyOrg")
       api = object({
         known_client_applications      = optional(list(string), [])
         mapped_claims_enabled          = optional(bool, false)
