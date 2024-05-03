@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
+
+**Merged pull requests:**
+
+- build\(deps\): bump github.com/gruntwork-io/terratest from 0.46.13 to 0.46.14 in /test [\#12](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/12) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the go\_modules group in /test with 2 updates [\#11](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/11) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v0.3.0](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.3.0) (2024-03-28)
 
 **Merged pull requests:**
