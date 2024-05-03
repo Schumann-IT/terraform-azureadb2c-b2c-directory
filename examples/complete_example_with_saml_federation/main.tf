@@ -14,7 +14,7 @@ provider "azurerm" {
 }
 
 data "azurerm_resource_group" "b2c" {
-  name = "<b2c resource group>"
+  name = "b2c"
 }
 
 module "b2c" {
