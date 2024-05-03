@@ -1,5 +1,6 @@
 module "identity_experience_framework_app_registration" {
-  source = "./modules/app-registration"
+  source  = "Schumann-IT/b2c-app-registration/azuread"
+  version = ">= 0.1.0, < 1.0.0"
 
   create    = false
   object_id = var.identity_experience_framework_app_registration_object_id
@@ -35,7 +36,8 @@ resource "azureadb2c_application_patch" "identity_experience_framework_app_regis
 }
 
 module "proxy_identity_experience_framework_app_registration" {
-  source = "./modules/app-registration"
+  source  = "Schumann-IT/b2c-app-registration/azuread"
+  version = ">= 0.1.0, < 1.0.0"
 
   create    = false
   object_id = var.proxy_identity_experience_framework_app_registration_object_id
@@ -60,7 +62,8 @@ module "proxy_identity_experience_framework_app_registration" {
 }
 
 module "custom_app_registrations" {
-  source = "./modules/app-registration"
+  source  = "Schumann-IT/b2c-app-registration/azuread"
+  version = ">= 0.1.0, < 1.0.0"
 
   for_each = {
     for app in var.custom_app_registrations : app.create == false ? data.azuread_application.existing_custom_app_registrations[app.app_registration_object_id].display_name : app.config.display_name => app
