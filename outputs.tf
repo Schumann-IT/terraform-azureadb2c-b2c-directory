@@ -49,3 +49,13 @@ output "proxy_identity_experience_framework_application_id" {
   description = "The application id of the proxy identity experience framework app registration"
   value       = module.proxy_identity_experience_framework_app_registration.application_id
 }
+
+output "storage_account_name" {
+  description = "The name of the storage account"
+  value       = var.template_storage.manage == true && length(data.azurerm_storage_account.template_storage) > 0 ? data.azurerm_storage_account.template_storage[0].name : azurerm_storage_account.template_storage[0].name
+}
+
+output "storage_container_name" {
+  description = "The name of the storage container"
+  value       = var.template_storage.manage == true && length(data.azurerm_storage_container.template_storage) > 0 ? data.azurerm_storage_container.template_storage[0].name : azurerm_storage_container.template_storage[0].name
+}

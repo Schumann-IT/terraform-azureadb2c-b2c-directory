@@ -14,17 +14,17 @@ provider "azurerm" {
 }
 
 data "azurerm_resource_group" "b2c" {
-  name = var.resource_group_name
+  name = "<b2c resource group>"
 }
 
 module "b2c" {
   source                                                         = "../../"
   resource_group_name                                            = data.azurerm_resource_group.b2c.name
-  client_id                                                      = var.client_id
-  client_secret                                                  = var.client_secret
-  domain_name                                                    = var.domain_name
-  identity_experience_framework_app_registration_object_id       = var.identity_experience_framework_app_registration_object_id
-  proxy_identity_experience_framework_app_registration_object_id = var.proxy_identity_experience_framework_app_registration_object_id
+  client_id                                                      = "<B2C ps client app id>"
+  client_secret                                                  = "<B2C ps client app secret>"
+  domain_name                                                    = "example.onmicrosoft.com"
+  identity_experience_framework_app_registration_object_id       = "<GUID>"
+  proxy_identity_experience_framework_app_registration_object_id = "<GUID>"
   template_storage = {
     manage = true
   }
@@ -32,7 +32,7 @@ module "b2c" {
   custom_app_registrations = [
     {
       create                     = false
-      app_registration_object_id = var.saml_app_registration_object_id
+      app_registration_object_id = "<GUID>"
       config = {
         api = {
           requested_access_token_version = 2
@@ -41,20 +41,20 @@ module "b2c" {
           enabled       = true
           redirect_uris = ["https://localhost/"]
         }
-        required_graph_api_permissions = ["e1fe6dd8-ba31-4d61-89e7-88639da4683d"]
-        identifier_uri                 = var.saml_identifier_uri
+        required_graph_api_permissions = ["e1fe6dd8-ba31-4d61-89e7-88639da4683d"] // https://learn.microsoft.com/en-us/graph/permissions-reference#userread
+        identifier_uri                 = "https://example.com/issuer"
       }
       patch = {
         file              = "${path.root}/SamlApplicationPatch.json"
-        saml_metadata_url = var.saml_metadata_url
+        saml_metadata_url = "https://example.com/broker/endpoint"
       }
   }]
 
   keysets = [
     {
       name                 = "SamlIdpCert"
-      certificate          = var.saml_certificate
-      certificate_password = var.saml_certificate_password
+      certificate          = "<PEM encoded Certificate>"
+      certificate_password = "<Certificate passphrase>"
     },
   ]
 
@@ -77,4 +77,3 @@ module "b2c" {
     },
   ]
 }
-

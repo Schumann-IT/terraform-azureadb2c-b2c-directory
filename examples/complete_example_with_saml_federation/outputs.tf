@@ -11,5 +11,15 @@ output "azure_b2c_cli_settings" {
 }
 
 output "localizations" {
-  value = module.b2c.localizations
+  value = {
+    for l in module.b2c.localizations : l.id => {
+      square_logo_dark_url  = l.square_logo_dark_url
+      square_logo_light_url = l.square_logo_light_url
+      background_image_url  = l.background_image_url
+      banner_logo_url       = l.banner_logo_url
+      username_hint_text    = l.username_hint_text
+      sign_in_page_text     = l.sign_in_page_text
+    }
+  }
 }
+
