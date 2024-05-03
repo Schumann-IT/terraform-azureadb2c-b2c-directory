@@ -4,6 +4,7 @@
 
 **Merged pull requests:**
 
+- feat: oidc support [\#13](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/13) ([janschumann](https://github.com/janschumann))
 - build\(deps\): bump github.com/gruntwork-io/terratest from 0.46.13 to 0.46.14 in /test [\#12](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/12) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump the go\_modules group in /test with 2 updates [\#11](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/11) ([dependabot[bot]](https://github.com/apps/dependabot))
 
