@@ -8,11 +8,6 @@ variable "client_secret" {
   description = "The application password to be used when authenticating using a client secret."
 }
 
-variable "resource_group_name" {
-  type        = string
-  description = "The name of the resource group in which the b2c directory has been created"
-}
-
 variable "domain_name" {
   type        = string
   description = "The name of the b2c directory domain"
@@ -28,25 +23,9 @@ variable "proxy_identity_experience_framework_app_registration_object_id" {
   description = "The object ID of the app registration for the proxy identity experience framework"
 }
 
-variable "custom_app_registrations" {
-  type        = any
-  default     = []
-  description = "A list of custom app registrations to create or update. For details see modules/app-registration"
-
-  validation {
-    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && try(app.app_registration_object_id, null) == null])
-    error_message = "If the create flag is set to true, app_registration_object_id must not be specified"
-  }
-
-  validation {
-    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && try(app.config.display_name, "") != ""])
-    error_message = "If the create flag is set to true, config.display_name must be specified"
-  }
-
-  validation {
-    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == false]) == length([for app in var.custom_app_registrations : app if(try(app.create, false) == false && try(app.app_registration_object_id, null) != null)])
-    error_message = "If the create flag is set to false, app_registration_object_id must also be specified"
-  }
+variable "resource_group_name" {
+  type        = string
+  description = "The name of the resource group in which the b2c directory has been created"
 }
 
 variable "template_storage" {
@@ -69,6 +48,25 @@ variable "template_storage" {
   validation {
     condition     = var.template_storage.manage == true && !(var.template_storage.existing_storage_account_name != null && var.template_storage.existing_storage_account_resource_group_name == null)
     error_message = "If the existing storage account name is specified, the existing storage account resource group name must also be specified"
+  }
+}
+
+variable "custom_app_registrations" {
+  type        = any
+  default     = []
+  description = "A list of custom app registrations to create or update. For details see modules/app-registration"
+
+  validation {
+    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && try(app.app_registration_object_id, null) == null])
+    error_message = "If the create flag is set to true, app_registration_object_id must not be specified"
+  }
+  validation {
+    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && try(app.config.display_name, "") != ""])
+    error_message = "If the create flag is set to true, config.display_name must be specified"
+  }
+  validation {
+    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == false]) == length([for app in var.custom_app_registrations : app if(try(app.create, false) == false && try(app.app_registration_object_id, null) != null)])
+    error_message = "If the create flag is set to false, app_registration_object_id must also be specified"
   }
 }
 

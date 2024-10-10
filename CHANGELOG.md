@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
+
+**Merged pull requests:**
+
+- feat: support singe page custom app [\#24](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/24) ([janschumann](https://github.com/janschumann))
+
 ## [v0.4.0](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.4.0) (2024-05-03)
 
 **Merged pull requests:**
