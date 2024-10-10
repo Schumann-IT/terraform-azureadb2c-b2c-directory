@@ -8,6 +8,11 @@ variable "client_secret" {
   description = "The application password to be used when authenticating using a client secret."
 }
 
+variable "resource_group_name" {
+  type        = string
+  description = "The name of the resource group in which the b2c directory has been created"
+}
+
 variable "domain_name" {
   type        = string
   description = "The name of the b2c directory domain"
@@ -23,9 +28,25 @@ variable "proxy_identity_experience_framework_app_registration_object_id" {
   description = "The object ID of the app registration for the proxy identity experience framework"
 }
 
-variable "resource_group_name" {
-  type        = string
-  description = "The name of the resource group in which the b2c directory has been created"
+variable "custom_app_registrations" {
+  type        = any
+  default     = []
+  description = "A list of custom app registrations to create or update. For details see modules/app-registration"
+
+  validation {
+    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && try(app.app_registration_object_id, null) == null])
+    error_message = "If the create flag is set to true, app_registration_object_id must not be specified"
+  }
+
+  validation {
+    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && try(app.config.display_name, "") != ""])
+    error_message = "If the create flag is set to true, config.display_name must be specified"
+  }
+
+  validation {
+    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == false]) == length([for app in var.custom_app_registrations : app if(try(app.create, false) == false && try(app.app_registration_object_id, null) != null)])
+    error_message = "If the create flag is set to false, app_registration_object_id must also be specified"
+  }
 }
 
 variable "template_storage" {
@@ -48,55 +69,6 @@ variable "template_storage" {
   validation {
     condition     = var.template_storage.manage == true && !(var.template_storage.existing_storage_account_name != null && var.template_storage.existing_storage_account_resource_group_name == null)
     error_message = "If the existing storage account name is specified, the existing storage account resource group name must also be specified"
-  }
-}
-
-variable "custom_app_registrations" {
-  type = list(object({
-    create                     = optional(bool, false)
-    app_registration_object_id = optional(string, null)
-    config = object({
-      display_name                   = optional(string, null)
-      fallback_public_client_enabled = optional(bool, false)
-      sign_in_audience               = optional(string, "AzureADMyOrg")
-      api = object({
-        known_client_applications      = optional(list(string), [])
-        mapped_claims_enabled          = optional(bool, false)
-        requested_access_token_version = number
-      })
-      web = optional(object({
-        enabled                       = optional(bool, false)
-        redirect_uris                 = optional(list(string), [])
-        logout_url                    = optional(string, null)
-        access_token_issuance_enabled = optional(bool, false)
-        id_token_issuance_enabled     = optional(bool, false)
-      }), {})
-      public_client = optional(object({
-        enabled       = optional(bool, false)
-        redirect_uris = optional(list(string), [])
-      }), {})
-      required_graph_api_permissions = optional(list(string), [])
-      identifier_uri                 = optional(string, "")
-      domain_name                    = optional(string, "")
-      permission_scopes = optional(list(object({
-        name                       = string
-        consent_type               = optional(string, "Admin")
-        admin_consent_description  = string
-        admin_consent_display_name = string
-      })), [])
-      required_resource_access = optional(map(list(string)), {})
-    })
-    patch = optional(object({
-      file              = string
-      saml_metadata_url = optional(string, null)
-    }), null)
-  }))
-  default     = []
-  description = "A list of custom app registrations to create or update"
-
-  validation {
-    condition     = length([for app in var.custom_app_registrations : app if app.create == true]) == length([for app in var.custom_app_registrations : app if app.create == true && app.app_registration_object_id != null])
-    error_message = "If the create flag is set to true, the app registration object ID must also be specified"
   }
 }
 
