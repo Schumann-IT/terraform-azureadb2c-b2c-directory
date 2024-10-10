@@ -57,16 +57,24 @@ variable "custom_app_registrations" {
   description = "A list of custom app registrations to create or update. For details see modules/app-registration"
 
   validation {
-    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && try(app.app_registration_object_id, null) == null])
-    error_message = "If the create flag is set to true, app_registration_object_id must not be specified"
+    condition     = length(var.custom_app_registrations) == length([for app in var.custom_app_registrations : app if can(merge(app.config, { display_name = "" }))])
+    error_message = "config must be defined for each app and must be an object. For details see modules/app-registration"
   }
   validation {
-    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && try(app.config.display_name, "") != ""])
+    condition     = length(var.custom_app_registrations) == length([for app in var.custom_app_registrations : app if can(tobool(app.create))])
+    error_message = "create must be defined for each app and must be boolean"
+  }
+  validation {
+    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == false]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == false && can(tostring(app.app_registration_object_id))])
+    error_message = "If the create flag is set to false, app_registration_object_id must be specified"
+  }
+  validation {
+    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && can(app.app_registration_object_id) && app.app_registration_object_id == null])
+    error_message = "If the create flag is set to true, app_registration_object_id must be null"
+  }
+  validation {
+    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == true]) == length([for app in var.custom_app_registrations : app if try(app.create, false) == true && try(app.config.display_name, "") != "" && try(app.config.display_name, null) != null])
     error_message = "If the create flag is set to true, config.display_name must be specified"
-  }
-  validation {
-    condition     = length([for app in var.custom_app_registrations : app if try(app.create, false) == false]) == length([for app in var.custom_app_registrations : app if(try(app.create, false) == false && try(app.app_registration_object_id, null) != null)])
-    error_message = "If the create flag is set to false, app_registration_object_id must also be specified"
   }
 }
 
