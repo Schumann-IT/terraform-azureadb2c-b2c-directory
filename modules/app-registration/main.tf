@@ -32,6 +32,14 @@ resource "azuread_application" "this" {
     }
   }
 
+  dynamic "single_page_application" {
+    for_each = var.config.single_page_application.enabled ? [1] : []
+
+    content {
+      redirect_uris = var.config.single_page_application.redirect_uris
+    }
+  }
+
   dynamic "required_resource_access" {
     for_each = length(var.config.required_graph_api_permissions) > 0 ? [1] : []
 

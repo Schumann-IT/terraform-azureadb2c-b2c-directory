@@ -32,6 +32,10 @@ variable "config" {
       enabled       = optional(bool, false)
       redirect_uris = optional(list(string), [])
     }), { enabled = false })
+    single_page_application = optional(object({
+      enabled       = optional(bool, false)
+      redirect_uris = optional(list(string), [])
+    }), { enabled = false })
     required_graph_api_permissions = optional(list(string), [])
     identifier_uri                 = optional(string, "")
     domain_name                    = optional(string, "")
