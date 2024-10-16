@@ -85,6 +85,7 @@ variable "keysets" {
     type                 = optional(string, null)
     certificate          = optional(string, null)
     certificate_password = optional(string, null)
+    secret               = optional(string, null)
   }))
   default     = []
   description = "A list of keysets to create or update"

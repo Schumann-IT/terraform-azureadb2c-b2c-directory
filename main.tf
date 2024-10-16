@@ -158,8 +158,9 @@ resource "azureadb2c_trustframework_keyset_key" "key_keysets" {
     name = each.key
   }
 
-  use  = each.value.use
-  type = each.value.type
+  use    = each.value.use
+  type   = each.value.type
+  secret = each.value.secret
 }
 
 resource "azureadb2c_organizational_branding_localization" "default" {
