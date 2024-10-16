@@ -1,9 +1,27 @@
-SHELL := /bin/bash
+docs:
+	@echo "Generating docs ..."
+	@rm -f .terraform.lock.hcl
+	@terraform-docs markdown --output-file README.md .
 
--include $(shell curl -sSL "https://raw.githubusercontent.com/Azure/tfmod-scaffold/main/scripts/install.sh" | bash -s > /dev/null ; echo tfmod-scaffold/GNUmakefile)
+validate:
+	@echo "Validating ..."
+	@terraform init -backend=false
+	@terraform validate
+	@echo "Checking code with tflint ..."
+	@tflint --init
+	@tflint --fix
 
-init:
-	@sh "$(CURDIR)/scripts/init.sh"
+fmt:
+	@terraform fmt -recursive
 
-cleanup:
-	@sh "$(CURDIR)/scripts/cleanup.sh"
+pre-commit: fmt validate docs
+
+clean-all: clean clean-examples
+
+clean:
+	@rm -Rf .terraform
+	@rm -Rf .terraform.lock.hcl
+
+clean-examples:
+	@$(foreach dir, $(wildcard ./examples/*/.terraform), rm -Rf $(dir);)
+	@$(foreach file, $(wildcard ./examples/*/.terraform.lock.hcl), rm -Rf $(file);)

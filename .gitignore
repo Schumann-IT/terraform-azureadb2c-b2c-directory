@@ -51,23 +51,5 @@ Gemfile.lock
 # SSH Key
 private_ssh_key
 
-# generated readme by the pr-check job
-
-README-generated.md
-
-**/override.tf
-
-.tflint.hcl
-.tflint_example.hcl
-.tflint.merged.hcl
-.tflint_example.merged.hcl
-
-tfmod-scaffold/
-scripts
-test/go.sum
-
-/TestRecord
-**/TestRecord.md.tmp
-
 examples/complete_example_with_saml_app/.env.bak
 examples/complete_example_with_saml_app/.env
