@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
+
+**Merged pull requests:**
+
+- fix: keyset validation [\#25](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/25) ([janschumann](https://github.com/janschumann))
+
 ## [v0.5.1](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.5.1) (2024-10-10)
 
 ## [v0.5.0](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.5.0) (2024-10-10)
