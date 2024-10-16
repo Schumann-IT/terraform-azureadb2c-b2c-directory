@@ -94,15 +94,15 @@ variable "keysets" {
     error_message = "If a certificate is specified, a certificate password must also be specified"
   }
   validation {
-    condition     = length([for keyset in var.keysets : keyset if keyset.certificate == null && keyset.use != null]) == length([for keyset in var.keysets : keyset if keyset.certificate == null && keyset.use == null && keyset.type == null])
+    condition     = length([for keyset in var.keysets : keyset if keyset.certificate == null]) == length([for keyset in var.keysets : keyset if keyset.certificate == null && keyset.use != null && keyset.type != null])
     error_message = "Either certificate and certificate_password OR use and type must be specified"
   }
   validation {
-    condition     = length([for keyset in var.keysets : keyset if keyset.use != null && keyset.certificate == null]) == length([for keyset in var.keysets : keyset if keyset.certificate == null && keyset.type == null])
+    condition     = length([for keyset in var.keysets : keyset if keyset.use != null]) == length([for keyset in var.keysets : keyset if keyset.use != null && keyset.type != null])
     error_message = "If a use is specified, type must also be specified"
   }
   validation {
-    condition     = length([for keyset in var.keysets : keyset if keyset.type != null && keyset.certificate == null]) == length([for keyset in var.keysets : keyset if keyset.certificate == null && keyset.use == null])
+    condition     = length([for keyset in var.keysets : keyset if keyset.type != null]) == length([for keyset in var.keysets : keyset if keyset.type != null && keyset.use != null])
     error_message = "If a type is specified, use must also be specified"
   }
 }
