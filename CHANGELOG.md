@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
+
+**Merged pull requests:**
+
+- fix: allow keyset to contain secret value [\#26](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/26) ([janschumann](https://github.com/janschumann))
+
 ## [v0.5.2](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.5.2) (2024-10-16)
 
 **Merged pull requests:**
