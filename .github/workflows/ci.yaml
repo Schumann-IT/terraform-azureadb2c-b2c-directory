@@ -44,11 +44,12 @@ jobs:
           terraform fmt -recursive -check
 
       - if: ${{ failure() && github.event_name == 'pull_request' }}
+        id: fmt
         name: Format code
         run: |
           terraform fmt -recursive
 
-      - if: ${{ success() && github.event_name == 'pull_request' }}
+      - if: ${{ steps.fmt.outcome == 'success' }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'chore: terraform fmt'
