@@ -22,7 +22,7 @@ output "custom_keys" {
 
 output "extension_app_registration_application_id" {
   description = "The application id of the extension app registration"
-  value  = data.azuread_application.extensions_app.client_id
+  value       = data.azuread_application.extensions_app.client_id
 }
 
 output "extension_app_registration_object_id" {
