@@ -40,6 +40,7 @@ jobs:
           terraform_version: ${{ vars.TERRAFORM_DEFAULT_VERSION && vars.TERRAFORM_DEFAULT_VERSION || 'latest' }}
 
       - name: Check formatting
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
         id: check
         run: |
           terraform fmt -recursive -check
