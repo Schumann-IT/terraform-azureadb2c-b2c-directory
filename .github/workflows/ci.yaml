@@ -61,4 +61,4 @@ jobs:
           config-file: .terraform-docs.yml
       - name: Status
         run: |
-          git status
+          git diff
