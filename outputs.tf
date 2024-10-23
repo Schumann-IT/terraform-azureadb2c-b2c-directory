@@ -17,12 +17,12 @@ output "custom_certificates" {
 
 output "custom_keys" {
   description = "The ids of the custom keys in the identity experience framework"
-  value       = [for keyset in azureadb2c_trustframework_keyset_key.key_keysets : keyset.key_set.id]
+  value = [for keyset in azureadb2c_trustframework_keyset_key.key_keysets : keyset.key_set.id]
 }
 
 output "extension_app_registration_application_id" {
   description = "The application id of the extension app registration"
-  value       = data.azuread_application.extensions_app.client_id
+  value = data.azuread_application.extensions_app.client_id
 }
 
 output "extension_app_registration_object_id" {
