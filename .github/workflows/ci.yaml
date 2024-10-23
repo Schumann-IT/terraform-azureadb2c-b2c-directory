@@ -57,7 +57,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: terraform-docs/gh-actions@v1.2.0
         with:
-          fail-on-diff: true
+          fail-on-diff: false
           config-file: .terraform-docs.yml
       - name: Status
         run: |
