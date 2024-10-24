@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
+
+**Merged pull requests:**
+
+- feat\(custom-app\): add secret management [\#27](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/27) ([janschumann](https://github.com/janschumann))
+
 ## [v0.5.3](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.5.3) (2024-10-16)
 
 **Merged pull requests:**
