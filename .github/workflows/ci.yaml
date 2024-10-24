@@ -9,81 +9,17 @@ on:
 
   push:
     branches:
+      - main
+
+    tags:
       - '*'
 
-permissions:
-    contents: write
+permissions: write-all
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: terraform-linters/setup-tflint@v4
-        with:
-          tflint_version: ${{ vars.TFLINT_DEFAULT_VERSION && format('v{0}', vars.TFLINT_DEFAULT_VERSION) || 'latest' }}
-
-      - name: Run TFLint
-        run: tflint -f compact
-
-  fmt-check:
-    runs-on: ubuntu-latest
-    steps:
-      - if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-      - if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: ${{ vars.TERRAFORM_DEFAULT_VERSION && vars.TERRAFORM_DEFAULT_VERSION || 'latest' }}
-
-      - name: Check formatting
-        continue-on-error: ${{ github.event_name == 'pull_request' }}
-        id: check
-        run: |
-          terraform fmt -recursive -check
-
-      - if: ${{ always() && github.event_name == 'pull_request' &&  steps.check.outcome == 'failure' }}
-        id: fmt
-        name: Format code
-        run: |
-          terraform fmt -recursive
-
-      - if: ${{ always() && github.event_name == 'pull_request' && steps.fmt.outcome == 'success' }}
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'chore: terraform fmt'
-
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: ${{ vars.TERRAFORM_DEFAULT_VERSION && vars.TERRAFORM_DEFAULT_VERSION || 'latest' }}
-
-      - name: Init module
-        run: |
-          terraform init -backend=false
-
-      - name: Validate module
-        run: |
-          terraform validate
-
-  docs-check:
-    runs-on: ubuntu-latest
-    steps:
-      - if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-      - if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/checkout@v4
-      - uses: terraform-docs/gh-actions@v1.2.0
-        with:
-          config-file: .terraform-docs.yml
-          fail-on-diff: ${{ github.event_name != 'pull_request' }}
-          git-push: ${{ github.event_name == 'pull_request' }}
-          git-commit-message: 'chore: update docs'
+  terraform:
+    uses: Schumann-IT/terraform-gh-workflows/.github/workflows/terraform.yaml@main
+    secrets: inherit
+  changelog:
+    uses: Schumann-IT/terraform-gh-workflows/.github/workflows/changelog.yaml@main
+    secrets: inherit
