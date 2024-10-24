@@ -6,6 +6,7 @@ output "custom_app_registrations" {
       object_id     = app.object_id
       client_id     = app.application_id
       client_secret = app.client_secret
+      redirect_uris = app.redirect_uris
     }
   }
 }

@@ -14,6 +14,14 @@ output "client_secret" {
   value = one(azuread_application_password.this[*].value)
 }
 
+output "redirect_uris" {
+  value = concat(
+    tolist(azuread_application.this.web[0].redirect_uris),
+    tolist(azuread_application.this.public_client[0].redirect_uris),
+    tolist(azuread_application.this.single_page_application[0].redirect_uris),
+  )
+}
+
 output "exposed_api_permissions" {
   value = {
     (azuread_application.this.client_id) = [
