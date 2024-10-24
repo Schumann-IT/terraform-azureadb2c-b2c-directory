@@ -46,6 +46,14 @@ variable "config" {
       admin_consent_display_name = string
     })), [])
     required_resource_access = optional(map(list(string)), {})
+    client_secret = optional(object({
+      create       = bool
+      display_name = optional(string, null)
+      start_date   = optional(string, null)
+      end_date     = optional(string, null)
+      }), {
+      create = false
+    })
   })
 
   validation {

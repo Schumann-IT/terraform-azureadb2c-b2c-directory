@@ -9,53 +9,17 @@ on:
 
   push:
     branches:
+      - main
+
+    tags:
       - '*'
 
+permissions: write-all
+
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: terraform-linters/setup-tflint@v4
-        with:
-          tflint_version: ${{ vars.TFLINT_DEFAULT_VERSION && format('v{0}', vars.TFLINT_DEFAULT_VERSION) || 'latest' }}
-
-      - name: Run TFLint
-        run: tflint -f compact
-
-  fmt-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: ${{ vars.TERRAFORM_DEFAULT_VERSION && vars.TERRAFORM_DEFAULT_VERSION || 'latest' }}
-
-      - name: Check formatting
-        run: |
-          terraform fmt -recursive -check
-
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: ${{ vars.TERRAFORM_DEFAULT_VERSION && vars.TERRAFORM_DEFAULT_VERSION || 'latest' }}
-
-      - name: Init module
-        run: |
-          terraform init -backend=false
-
-      - name: Validate module
-        run: |
-          terraform validate
-
-  docs-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: terraform-docs/gh-actions@v1.2.0
-        with:
-          fail-on-diff: true
-          config-file: .terraform-docs.yml
+  terraform:
+    uses: Schumann-IT/terraform-gh-workflows/.github/workflows/terraform.yaml@main
+    secrets: inherit
+  changelog:
+    uses: Schumann-IT/terraform-gh-workflows/.github/workflows/changelog.yaml@main
+    secrets: inherit

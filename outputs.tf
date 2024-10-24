@@ -1,7 +1,12 @@
-output "custom_app_registration_application_ids" {
-  description = "The application ids of the custom app registrations"
+output "custom_app_registrations" {
+  description = "Custom app registrations"
+  sensitive   = true
   value = {
-    for app in module.custom_app_registrations : app.display_name => app.application_id
+    for app in module.custom_app_registrations : app.display_name => {
+      object_id     = app.object_id
+      client_id     = app.application_id
+      client_secret = app.client_secret
+    }
   }
 }
 
@@ -50,9 +55,13 @@ output "proxy_identity_experience_framework_application_id" {
   value       = module.proxy_identity_experience_framework_app_registration.application_id
 }
 
-output "storage_account_name" {
-  description = "The name of the storage account"
-  value       = var.template_storage.manage == true && length(data.azurerm_storage_account.template_storage) > 0 ? data.azurerm_storage_account.template_storage[0].name : azurerm_storage_account.template_storage[0].name
+output "storage_account" {
+  description = "The template storage account"
+  sensitive   = true
+  value = {
+    name               = local.storage_account.name
+    primary_access_key = local.storage_account.primary_access_key
+  }
 }
 
 output "storage_container_name" {

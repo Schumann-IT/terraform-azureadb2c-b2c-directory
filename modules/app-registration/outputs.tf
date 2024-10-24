@@ -10,6 +10,10 @@ output "application_id" {
   value = azuread_application.this.client_id
 }
 
+output "client_secret" {
+  value = one(azuread_application_password.this[*].value)
+}
+
 output "exposed_api_permissions" {
   value = {
     (azuread_application.this.client_id) = [

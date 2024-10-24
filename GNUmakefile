@@ -1,7 +1,7 @@
 docs:
 	@echo "Generating docs ..."
 	@rm -f .terraform.lock.hcl
-	@terraform-docs markdown --output-file README.md .
+	@terraform-docs markdown table --config .terraform-docs.yml --output-mode inject --output-file README.md .
 
 validate:
 	@echo "Validating ..."

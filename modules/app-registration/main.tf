@@ -112,3 +112,12 @@ resource "azuread_application_permission_scope" "this" {
     azuread_application_identifier_uri.this
   ]
 }
+
+resource "azuread_application_password" "this" {
+  count = var.config.client_secret.create ? 1 : 0
+
+  application_id = azuread_application.this.id
+  display_name   = var.config.client_secret.display_name
+  start_date     = var.config.client_secret.start_date
+  end_date       = var.config.client_secret.end_date
+}
