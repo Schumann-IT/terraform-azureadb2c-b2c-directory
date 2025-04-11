@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
+
+**Merged pull requests:**
+
+- feat: support GraphAPI application permissions [\#28](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/28) ([janschumann](https://github.com/janschumann))
+
 ## [v0.6.1](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.6.1) (2024-10-24)
 
 ## [v0.6.0](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.6.0) (2024-10-24)
