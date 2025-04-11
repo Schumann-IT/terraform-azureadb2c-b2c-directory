@@ -16,9 +16,9 @@ output "client_secret" {
 
 output "redirect_uris" {
   value = concat(
-    tolist(azuread_application.this.web[0].redirect_uris),
-    tolist(azuread_application.this.public_client[0].redirect_uris),
-    tolist(azuread_application.this.single_page_application[0].redirect_uris),
+    tolist(try(azuread_application.this.web[0].redirect_uris, [])),
+    tolist(try(azuread_application.this.public_client[0].redirect_uris, [])),
+    tolist(try(azuread_application.this.single_page_application[0].redirect_uris, [])),
   )
 }
 
