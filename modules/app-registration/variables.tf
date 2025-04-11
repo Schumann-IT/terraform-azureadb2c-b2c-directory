@@ -37,6 +37,7 @@ variable "config" {
       redirect_uris = optional(list(string), [])
     }), { enabled = false })
     required_graph_api_permissions = optional(list(string), [])
+    required_graph_api_application_permissions = optional(list(string), [])
     identifier_uri                 = optional(string, "")
     domain_name                    = optional(string, "")
     permission_scopes = optional(list(object({

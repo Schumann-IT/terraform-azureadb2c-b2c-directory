@@ -58,6 +58,23 @@ resource "azuread_application" "this" {
   }
 
   dynamic "required_resource_access" {
+    for_each = length(var.config.required_graph_api_application_permissions) > 0 ? [1] : []
+
+    content {
+      resource_app_id = local.graph_api_resource_app_id
+
+      dynamic "resource_access" {
+        for_each = var.config.required_graph_api_application_permissions
+
+        content {
+          id   = resource_access.value
+          type = "Role"
+        }
+      }
+    }
+  }
+
+  dynamic "required_resource_access" {
     for_each = var.config.required_resource_access
 
     content {
