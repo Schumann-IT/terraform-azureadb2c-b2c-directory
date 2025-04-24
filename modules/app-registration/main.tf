@@ -41,7 +41,7 @@ resource "azuread_application" "this" {
   }
 
   dynamic "required_resource_access" {
-    for_each = length(var.config.required_graph_api_permissions) > 0 ? [1] : []
+    for_each = length(var.config.required_graph_api_permissions) + length(var.config.required_graph_api_application_permissions) > 0 ? [1] : []
 
     content {
       resource_app_id = local.graph_api_resource_app_id
@@ -54,14 +54,6 @@ resource "azuread_application" "this" {
           type = "Scope"
         }
       }
-    }
-  }
-
-  dynamic "required_resource_access" {
-    for_each = length(var.config.required_graph_api_application_permissions) > 0 ? [1] : []
-
-    content {
-      resource_app_id = local.graph_api_resource_app_id
 
       dynamic "resource_access" {
         for_each = var.config.required_graph_api_application_permissions
