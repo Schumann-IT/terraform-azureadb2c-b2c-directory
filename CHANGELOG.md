@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/HEAD)
+
+**Merged pull requests:**
+
+- fix: allow both application and delegated permissions for graph api [\#29](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/pull/29) ([janschumann](https://github.com/janschumann))
+
 ## [v0.7.0](https://github.com/Schumann-IT/terraform-azureadb2c-b2c-directory/tree/v0.7.0) (2025-04-11)
 
 **Merged pull requests:**
